@@ -24,6 +24,44 @@ spawner-wrench:
   # How many spawners a single wrench can mine before it shatters and vanishes.
   max-uses: 5
 
+vein-pickaxe:
+  # How many veins can be mined before the pickaxe shatters.
+  max-uses: 256
+  # Maximum number of connected ore blocks broken per vein.
+  max-blocks: 64
+
+excavator-shovel:
+  # How many digs before the shovel shatters.
+  max-uses: 256
+  # Radius of the dig plane. 1 = 3x3, 2 = 5x5, capped at 4.
+  radius: 1
+
+builders-wand:
+  # How many placements before the wand shatters.
+  max-uses: 256
+  # Radius of the patch extended per click. 1 = up to 3x3, capped at 3.
+  radius: 1
+
+painter-brush:
+  # How many blocks can be painted before the brush wears out.
+  max-uses: 256
+
+harvest-sickle:
+  # How many harvests before the sickle snaps.
+  max-uses: 256
+  # Radius of the harvest area. 1 = 3x3, 2 = 5x5, capped at 4.
+  radius: 1
+
+grappling-hook:
+  # How many grapples before the hook snaps.
+  max-uses: 128
+  # Launch strength. Higher = faster pull.
+  power: 1.5
+  # Maximum distance (blocks) the hook can anchor to.
+  max-distance: 30.0
+  # Cooldown between grapples (20 ticks = 1 second).
+  cooldown-ticks: 20
+
 infinite-block:
   # Charge configuration for placing an infinite block.
   cost:

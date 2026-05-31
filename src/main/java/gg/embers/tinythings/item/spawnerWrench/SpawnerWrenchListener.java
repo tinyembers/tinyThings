@@ -27,6 +27,7 @@ import gg.embers.tinythings.TinyThings;
 import gg.embers.tinythings.item.spawnerWrench.SpawnerWrenchItem;
 import java.util.HashMap;
 import java.util.Locale;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -50,10 +51,12 @@ public class SpawnerWrenchListener
 implements Listener {
     private final TinyThings plugin;
     private final SpawnerWrenchItem item;
+    private final boolean roseStacker;
 
     public SpawnerWrenchListener(TinyThings tinyThings, SpawnerWrenchItem spawnerWrenchItem) {
         this.plugin = tinyThings;
         this.item = spawnerWrenchItem;
+        this.roseStacker = Bukkit.getPluginManager().getPlugin("RoseStacker") != null;
     }
 
     @EventHandler
@@ -80,12 +83,13 @@ implements Listener {
             return;
         }
         CreatureSpawner creatureSpawner = (CreatureSpawner)blockState;
-        blockState = creatureSpawner.getSpawnedType();
-        ItemStack itemStack2 = this.buildSpawnerItem(creatureSpawner, (EntityType)blockState);
+        ItemStack itemStack2 = this.roseStacker
+                ? RoseStackerHook.takeSpawnerItem(block)
+                : this.buildSpawnerItem(creatureSpawner, creatureSpawner.getSpawnedType());
         block.setType(Material.AIR, false);
         block.getWorld().spawnParticle(Particle.SMOKE, block.getLocation().add(0.5, 0.5, 0.5), 20, 0.3, 0.3, 0.3, 0.02);
         block.getWorld().playSound(block.getLocation(), Sound.BLOCK_NETHERITE_BLOCK_BREAK, 1.0f, 1.2f);
-        HashMap hashMap = player.getInventory().addItem(new ItemStack[]{itemStack2});
+        HashMap<Integer, ItemStack> hashMap = player.getInventory().addItem(new ItemStack[]{itemStack2});
         if (!hashMap.isEmpty()) {
             for (ItemStack itemStack3 : hashMap.values()) {
                 block.getWorld().dropItemNaturally(block.getLocation().add(0.5, 0.5, 0.5), itemStack3);
@@ -144,7 +148,7 @@ implements Listener {
             return;
         }
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.getPersistentDataContainer().set(this.item.usesKey(), PersistentDataType.INTEGER, (Object)n2);
+        itemMeta.getPersistentDataContainer().set(this.item.usesKey(), PersistentDataType.INTEGER, n2);
         itemMeta.setLore(this.item.buildLore(n2, n));
         itemStack.setItemMeta(itemMeta);
     }

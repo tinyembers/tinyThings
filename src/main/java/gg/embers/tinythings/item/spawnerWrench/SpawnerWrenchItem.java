@@ -73,8 +73,8 @@ implements TinyItem {
         itemMeta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE});
         itemMeta.setUnbreakable(true);
         PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
-        persistentDataContainer.set(this.plugin.itemIdKey(), PersistentDataType.STRING, (Object)ID);
-        persistentDataContainer.set(this.usesKey, PersistentDataType.INTEGER, (Object)n);
+        persistentDataContainer.set(this.plugin.itemIdKey(), PersistentDataType.STRING, ID);
+        persistentDataContainer.set(this.usesKey, PersistentDataType.INTEGER, n);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

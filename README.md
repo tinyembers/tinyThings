@@ -1,10 +1,10 @@
 # tinyThings
 
-Extensible Paper/Spigot plugin for custom command-only items — Super Sponge, Magnet Stick, Surveyor Stick, Super Bonemeal, Spawner Wrench, and an Infinite Block placement system. Includes a `/size` command for player scaling.
+Extensible Paper/Spigot plugin for custom command-only items — Super Sponge, Magnet Stick, Surveyor Stick, Super Bonemeal, Spawner Wrench, Vein Pickaxe, Excavator Shovel, Builder's Wand, Painter Brush, Harvest Sickle, Grappling Hook, and an Infinite Block placement system. Includes a `/size` command for player scaling.
 
 - **API:** Paper 1.21
 - **Main class:** `gg.embers.tinythings.TinyThings`
-- **Soft deps:** Vault, ShopGUIPlus
+- **Soft deps:** Vault, ShopGUIPlus, RoseStacker
 
 ## Build
 
