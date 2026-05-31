@@ -1,0 +1,40 @@
+name: tinyThings
+version: '1.0'
+main: gg.embers.tinythings.TinyThings
+api-version: '1.21'
+description: Extensible plugin for custom command-only items (Super Sponge and friends)
+authors: [Tiny Embers, Levah]
+website: https://embers.gg
+softdepend: [Vault, ShopGUIPlus]
+
+commands:
+  tinythings:
+    description: tinyThings root command
+    usage: /tinythings <give|list|make-infinite|reload|help>
+    aliases: [tt, tiny]
+  size:
+    description: Set your (or a player's) scale attribute
+    usage: /size [<number>] [<player>]
+    permission: embers.size
+
+permissions:
+  tinythings.*:
+    description: All tinyThings permissions
+    default: op
+    children:
+      tinythings.give: true
+      tinythings.list: true
+      tinythings.reload: true
+      tinythings.make-infinite: true
+  tinythings.give:
+    description: Give tinyThings items
+    default: op
+  tinythings.list:
+    description: List registered items
+    default: op
+  tinythings.reload:
+    description: Reload the tinyThings config
+    default: op
+  tinythings.make-infinite:
+    description: Turn the held item into an infinite block
+    default: op

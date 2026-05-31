@@ -1,0 +1,42 @@
+# tinyThings configuration
+# Each item registered by the plugin can read its own section here.
+
+super-sponge:
+  # Maximum number of water blocks (or waterlogged blocks / coral / etc) absorbed per placement.
+  max-blocks: 500
+
+magnet-stick:
+  # Block radius around the player to pull items from.
+  radius: 8
+  # How long the magnet pulls items after activation (20 ticks = 1 second).
+  duration-ticks: 100
+  # Cooldown before the same player can activate it again.
+  cooldown-ticks: 200
+
+# surveyor-stick has no configurable options.
+
+super-bonemeal:
+  # Radius around the clicked block to apply bonemeal to.
+  # radius=2 means a 5x5 area (2 blocks on each side + the clicked block).
+  radius: 2
+
+spawner-wrench:
+  # How many spawners a single wrench can mine before it shatters and vanishes.
+  max-uses: 5
+
+infinite-block:
+  # Charge configuration for placing an infinite block.
+  cost:
+    # "percentage" -> charge a % of the ShopGUIPlus buy price for the block
+    # "flat"       -> charge a fixed dollar amount regardless of block type
+    mode: percentage
+    # Used when mode = "percentage". 0.1 means 10% of the shop buy price.
+    percentage: 0.1
+    # Used when mode = "flat". Flat dollar cost per placement.
+    flat: 10.0
+    # Used when mode = "percentage" and the shop price for this block is 0 or unknown
+    # (e.g. ShopGUIPlus isn't installed or this material isn't listed in any shop).
+    fallback: 10.0
+  # Materials that may never be turned into / placed as infinite blocks.
+  blacklist:
+    - SHULKER_BOX
