@@ -62,6 +62,9 @@ grappling-hook:
   # Cooldown between grapples (20 ticks = 1 second).
   cooldown-ticks: 20
 
+# Infinite water / lava / snow (powder snow) buckets place their contents without ever
+# emptying. They have no configurable options.
+
 infinite-block:
   # Charge configuration for placing an infinite block.
   cost:
