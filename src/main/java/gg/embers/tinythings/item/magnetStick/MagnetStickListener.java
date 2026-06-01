@@ -72,7 +72,7 @@ implements Listener {
         this.cooldownEndsAt.put(player.getUniqueId(), l + (long)n3 * 50L);
         player.sendMessage("\u00a7dMagnet activated!");
         player.playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 0.5f, 1.6f);
-        new BukkitRunnable(this){
+        new BukkitRunnable(){
             int ticks = 0;
 
             public void run() {
@@ -82,13 +82,12 @@ implements Listener {
                 }
                 Vector vector = player.getLocation().add(0.0, 0.5, 0.0).toVector();
                 for (Entity entity : player.getNearbyEntities((double)n, (double)n, (double)n)) {
-                    double d;
                     UUID uUID;
                     Item item;
                     if (!(entity instanceof Item) || (item = (Item)entity).getPickupDelay() >= Short.MAX_VALUE || (uUID = item.getOwner()) != null && !uUID.equals(player.getUniqueId())) continue;
                     Vector vector2 = vector.clone().subtract(item.getLocation().toVector());
                     double d2 = vector2.lengthSquared();
-                    if (d < 0.5) continue;
+                    if (d2 < 0.5) continue;
                     double d3 = Math.min(0.8, 0.25 + 0.05 * Math.sqrt(d2));
                     item.setVelocity(vector2.normalize().multiply(d3));
                 }

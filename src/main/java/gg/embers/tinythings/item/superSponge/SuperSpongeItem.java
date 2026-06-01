@@ -75,7 +75,7 @@ implements TinyItem {
         itemMeta.setLore(List.of("\u00a77Absorbs up to \u00a7b" + n + "\u00a77 water blocks"));
         itemMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         itemMeta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS});
-        itemMeta.getPersistentDataContainer().set(this.plugin.itemIdKey(), PersistentDataType.STRING, (Object)ID);
+        itemMeta.getPersistentDataContainer().set(this.plugin.itemIdKey(), PersistentDataType.STRING, ID);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

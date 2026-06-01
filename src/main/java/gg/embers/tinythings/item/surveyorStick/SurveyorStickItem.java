@@ -55,7 +55,7 @@ implements TinyItem {
         itemMeta.setLore(List.of("\u00a77Right-click two blocks to measure", "\u00a77distance, area and volume.", "\u00a77Shift + right-click to reset."));
         itemMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         itemMeta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES});
-        itemMeta.getPersistentDataContainer().set(this.plugin.itemIdKey(), PersistentDataType.STRING, (Object)ID);
+        itemMeta.getPersistentDataContainer().set(this.plugin.itemIdKey(), PersistentDataType.STRING, ID);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

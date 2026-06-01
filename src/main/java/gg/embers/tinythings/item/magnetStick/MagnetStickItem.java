@@ -58,7 +58,7 @@ implements TinyItem {
         itemMeta.setLore(List.of("\u00a77Right-click to pull nearby items", "\u00a77Radius: \u00a7d" + n + "\u00a77 blocks", "\u00a77Duration: \u00a7d" + (double)n2 / 20.0 + "\u00a77s", "\u00a77Cooldown: \u00a7d" + (double)n3 / 20.0 + "\u00a77s"));
         itemMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         itemMeta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES});
-        itemMeta.getPersistentDataContainer().set(this.plugin.itemIdKey(), PersistentDataType.STRING, (Object)ID);
+        itemMeta.getPersistentDataContainer().set(this.plugin.itemIdKey(), PersistentDataType.STRING, ID);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

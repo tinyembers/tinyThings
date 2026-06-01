@@ -120,7 +120,7 @@ implements Listener {
         }
         if (bl) {
             ItemMeta itemMeta = itemStack.getItemMeta();
-            itemMeta.getPersistentDataContainer().set(this.versionKey, PersistentDataType.INTEGER, (Object)n);
+            itemMeta.getPersistentDataContainer().set(this.versionKey, PersistentDataType.INTEGER, n);
             itemStack.setItemMeta(itemMeta);
         }
         return bl;
@@ -136,8 +136,8 @@ implements Listener {
         }
         ItemMeta itemMeta = itemStack.getItemMeta();
         PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
-        persistentDataContainer.set(this.infBlockKey, PersistentDataType.BOOLEAN, (Object)true);
-        persistentDataContainer.set(this.versionKey, PersistentDataType.INTEGER, (Object)0);
+        persistentDataContainer.set(this.infBlockKey, PersistentDataType.BOOLEAN, true);
+        persistentDataContainer.set(this.versionKey, PersistentDataType.INTEGER, 0);
         String string = InfiniteBlockManager.capitalizeFully(itemStack.getType().toString().replace("_", " "));
         itemMeta.itemName(Component.text((String)("Infinite " + string)).color((TextColor)NamedTextColor.GREEN));
         itemMeta.lore(List.of((TextComponent)((TextComponent)((TextComponent)((TextComponent)Component.text((String)"An infinite ").append(Component.text((String)string).decorate(TextDecoration.BOLD))).append((Component)Component.text((String)(". " + this.costDescription())))).decoration(TextDecoration.ITALIC, false)).color((TextColor)NamedTextColor.GRAY)));

@@ -57,7 +57,7 @@ implements TinyItem {
         itemMeta.setLore(List.of("\u00a77Grows everything in a \u00a76" + n2 + "\u00d7" + n2 + "\u00a77 area", "\u00a77around the clicked block.", "\u00a77Consumes one per use."));
         itemMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
         itemMeta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES});
-        itemMeta.getPersistentDataContainer().set(this.plugin.itemIdKey(), PersistentDataType.STRING, (Object)ID);
+        itemMeta.getPersistentDataContainer().set(this.plugin.itemIdKey(), PersistentDataType.STRING, ID);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
