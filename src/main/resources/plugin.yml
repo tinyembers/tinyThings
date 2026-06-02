@@ -1,5 +1,5 @@
 name: tinyThings
-version: '1.0'
+version: '${git.commit.id.abbrev}'
 main: gg.embers.tinythings.TinyThings
 api-version: '1.21'
 description: Extensible plugin for custom command-only items (Super Sponge and friends)
