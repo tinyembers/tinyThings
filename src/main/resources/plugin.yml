@@ -41,3 +41,9 @@ permissions:
   tinythings.biomestick.use:
     description: Use the Biome Stick to repaint region biomes
     default: op
+  embers.size:
+    description: Use /size to set your own scale (0.6 to 3.0)
+    default: op
+  embers.admin:
+    description: Set any size from 0 to 16 and change other players' sizes via /size
+    default: op
