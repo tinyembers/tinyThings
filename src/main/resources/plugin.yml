@@ -5,7 +5,7 @@ api-version: '1.21'
 description: Extensible plugin for custom command-only items (Super Sponge and friends)
 authors: [Tiny Embers, Levah]
 website: https://embers.gg
-softdepend: [Vault, ShopGUIPlus, RoseStacker]
+softdepend: [Vault, ShopGUIPlus, RoseStacker, FastAsyncWorldEdit, WorldEdit]
 
 commands:
   tinythings:
@@ -37,4 +37,7 @@ permissions:
     default: op
   tinythings.make-infinite:
     description: Turn the held item into an infinite block
+    default: op
+  tinythings.biomestick.use:
+    description: Use the Biome Stick to repaint region biomes
     default: op

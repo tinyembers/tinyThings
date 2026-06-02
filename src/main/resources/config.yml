@@ -15,6 +15,20 @@ magnet-stick:
 
 # surveyor-stick has no configurable options.
 
+biome-stick:
+  # Requires FastAsyncWorldEdit (FAWE) on the server. Lists every biome registered with
+  # WorldEdit/FAWE, which includes vanilla Minecraft biomes and datapack biomes (Terralith).
+  #
+  # Maximum horizontal footprint (X * Z, in columns/blocks) a single paint may cover.
+  # Larger selections are rejected so nobody re-biomes half the map at once.
+  # 10000 = a 100x100 area. Set to 0 (or below) for no limit.
+  max-area: 10000
+  # Paint the full vertical column (world bottom to top). Recommended true so the surface
+  # biome — grass/water colour, weather, mob spawns, foliage — actually changes.
+  full-height: true
+  # Only used when full-height is false: blocks above and below the clicked corners to paint.
+  vertical-radius: 16
+
 super-bonemeal:
   # Radius around the clicked block to apply bonemeal to.
   # radius=2 means a 5x5 area (2 blocks on each side + the clicked block).

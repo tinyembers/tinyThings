@@ -20,6 +20,7 @@ package gg.embers.tinythings;
 import gg.embers.tinythings.command.SizeCommand;
 import gg.embers.tinythings.command.TinyThingsCommand;
 import gg.embers.tinythings.item.ItemRegistry;
+import gg.embers.tinythings.item.biomeStick.BiomeStickItem;
 import gg.embers.tinythings.item.buildersWand.BuildersWandItem;
 import gg.embers.tinythings.item.excavatorShovel.ExcavatorShovelItem;
 import gg.embers.tinythings.item.grapplingHook.GrapplingHookItem;
@@ -78,6 +79,7 @@ extends JavaPlugin {
         this.registry.register(new SuperSpongeItem(this));
         this.registry.register(new MagnetStickItem(this));
         this.registry.register(new SurveyorStickItem(this));
+        this.registry.register(new BiomeStickItem(this));
         this.registry.register(new SuperBonemealItem(this));
         this.registry.register(new SpawnerWrenchItem(this));
         this.registry.register(new VeinPickaxeItem(this));
