@@ -19,6 +19,7 @@ package gg.embers.tinythings;
 
 import gg.embers.tinythings.command.SizeCommand;
 import gg.embers.tinythings.command.TinyThingsCommand;
+import gg.embers.tinythings.item.Durability;
 import gg.embers.tinythings.item.ItemRegistry;
 import gg.embers.tinythings.item.biomeStick.BiomeStickItem;
 import gg.embers.tinythings.item.buildersWand.BuildersWandItem;
@@ -92,6 +93,7 @@ extends JavaPlugin {
         this.registry.register(new InfiniteLavaBucketItem(this));
         this.registry.register(new InfiniteSnowBucketItem(this));
         this.registry.all().forEach(tinyItem -> tinyItem.register(this));
+        Bukkit.getPluginManager().registerEvents((Listener)new Durability(this), (Plugin)this);
         this.setupEconomy();
         this.infiniteBlockManager = new InfiniteBlockManager(this);
         Bukkit.getPluginManager().registerEvents((Listener)this.infiniteBlockManager, (Plugin)this);

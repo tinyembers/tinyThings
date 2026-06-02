@@ -24,6 +24,7 @@
 package gg.embers.tinythings.item.spawnerWrench;
 
 import gg.embers.tinythings.TinyThings;
+import gg.embers.tinythings.item.Durability;
 import gg.embers.tinythings.item.spawnerWrench.SpawnerWrenchItem;
 import java.util.HashMap;
 import java.util.Locale;
@@ -150,6 +151,7 @@ implements Listener {
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.getPersistentDataContainer().set(this.item.usesKey(), PersistentDataType.INTEGER, n2);
         itemMeta.setLore(this.item.buildLore(n2, n));
+        Durability.apply(itemMeta, n2, n);
         itemStack.setItemMeta(itemMeta);
     }
 }

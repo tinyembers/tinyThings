@@ -1,6 +1,7 @@
 package gg.embers.tinythings.item.harvestSickle;
 
 import gg.embers.tinythings.TinyThings;
+import gg.embers.tinythings.item.Durability;
 import java.util.Collection;
 import java.util.Set;
 import org.bukkit.GameMode;
@@ -101,6 +102,7 @@ public class HarvestSickleListener implements Listener {
         ItemMeta meta = tool.getItemMeta();
         meta.getPersistentDataContainer().set(this.item.usesKey(), PersistentDataType.INTEGER, remaining);
         meta.setLore(this.item.buildLore(remaining, max, size));
+        Durability.apply(meta, remaining, max);
         tool.setItemMeta(meta);
     }
 }

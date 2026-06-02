@@ -1,6 +1,7 @@
 package gg.embers.tinythings.item.veinPickaxe;
 
 import gg.embers.tinythings.TinyThings;
+import gg.embers.tinythings.item.Durability;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -112,6 +113,7 @@ public class VeinPickaxeListener implements Listener {
         ItemMeta meta = tool.getItemMeta();
         meta.getPersistentDataContainer().set(this.item.usesKey(), PersistentDataType.INTEGER, remaining);
         meta.setLore(this.item.buildLore(remaining, max));
+        Durability.apply(meta, remaining, max);
         tool.setItemMeta(meta);
     }
 }

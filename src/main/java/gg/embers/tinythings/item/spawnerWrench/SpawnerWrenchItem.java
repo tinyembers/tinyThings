@@ -17,6 +17,7 @@
 package gg.embers.tinythings.item.spawnerWrench;
 
 import gg.embers.tinythings.TinyThings;
+import gg.embers.tinythings.item.Durability;
 import gg.embers.tinythings.item.TinyItem;
 import gg.embers.tinythings.item.spawnerWrench.SpawnerWrenchListener;
 import java.util.ArrayList;
@@ -70,11 +71,11 @@ implements TinyItem {
         itemMeta.setDisplayName("\u00a76Spawner Wrench");
         itemMeta.setLore(this.buildLore(n, n));
         itemMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
-        itemMeta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE});
-        itemMeta.setUnbreakable(true);
+        itemMeta.addItemFlags(new ItemFlag[]{ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES});
         PersistentDataContainer persistentDataContainer = itemMeta.getPersistentDataContainer();
         persistentDataContainer.set(this.plugin.itemIdKey(), PersistentDataType.STRING, ID);
         persistentDataContainer.set(this.usesKey, PersistentDataType.INTEGER, n);
+        Durability.apply(itemMeta, n, n);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

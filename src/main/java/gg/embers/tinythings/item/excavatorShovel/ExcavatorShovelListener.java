@@ -1,6 +1,7 @@
 package gg.embers.tinythings.item.excavatorShovel;
 
 import gg.embers.tinythings.TinyThings;
+import gg.embers.tinythings.item.Durability;
 import java.util.Set;
 import org.bukkit.FluidCollisionMode;
 import org.bukkit.GameMode;
@@ -117,6 +118,7 @@ public class ExcavatorShovelListener implements Listener {
         ItemMeta meta = tool.getItemMeta();
         meta.getPersistentDataContainer().set(this.item.usesKey(), PersistentDataType.INTEGER, remaining);
         meta.setLore(this.item.buildLore(remaining, max, size));
+        Durability.apply(meta, remaining, max);
         tool.setItemMeta(meta);
     }
 }

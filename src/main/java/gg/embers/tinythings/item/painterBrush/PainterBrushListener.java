@@ -1,6 +1,7 @@
 package gg.embers.tinythings.item.painterBrush;
 
 import gg.embers.tinythings.TinyThings;
+import gg.embers.tinythings.item.Durability;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
@@ -146,6 +147,7 @@ public class PainterBrushListener implements Listener {
         ItemMeta meta = brush.getItemMeta();
         meta.getPersistentDataContainer().set(this.item.usesKey(), PersistentDataType.INTEGER, remaining);
         meta.setLore(this.item.buildLore(remaining, max, picked));
+        Durability.apply(meta, remaining, max);
         brush.setItemMeta(meta);
     }
 }

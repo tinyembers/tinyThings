@@ -1,6 +1,7 @@
 package gg.embers.tinythings.item.veinPickaxe;
 
 import gg.embers.tinythings.TinyThings;
+import gg.embers.tinythings.item.Durability;
 import gg.embers.tinythings.item.TinyItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,11 +55,11 @@ public class VeinPickaxeItem implements TinyItem {
         itemMeta.setDisplayName("§bVein Pickaxe");
         itemMeta.setLore(this.buildLore(uses, uses));
         itemMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
-        itemMeta.setUnbreakable(true);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS, ItemFlag.HIDE_ATTRIBUTES);
         PersistentDataContainer container = itemMeta.getPersistentDataContainer();
         container.set(this.plugin.itemIdKey(), PersistentDataType.STRING, ID);
         container.set(this.usesKey, PersistentDataType.INTEGER, uses);
+        Durability.apply(itemMeta, uses, uses);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
