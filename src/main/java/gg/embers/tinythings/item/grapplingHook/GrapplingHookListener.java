@@ -1,6 +1,7 @@
 package gg.embers.tinythings.item.grapplingHook;
 
 import gg.embers.tinythings.TinyThings;
+import gg.embers.tinythings.item.Durability;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -98,6 +99,7 @@ public class GrapplingHookListener implements Listener {
         ItemMeta meta = hook.getItemMeta();
         meta.getPersistentDataContainer().set(this.item.usesKey(), PersistentDataType.INTEGER, remaining);
         meta.setLore(this.item.buildLore(remaining, max));
+        Durability.apply(meta, remaining, max);
         hook.setItemMeta(meta);
     }
 }

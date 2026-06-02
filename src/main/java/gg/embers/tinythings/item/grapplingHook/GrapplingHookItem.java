@@ -1,6 +1,7 @@
 package gg.embers.tinythings.item.grapplingHook;
 
 import gg.embers.tinythings.TinyThings;
+import gg.embers.tinythings.item.Durability;
 import gg.embers.tinythings.item.TinyItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,7 @@ public class GrapplingHookItem implements TinyItem {
         PersistentDataContainer container = itemMeta.getPersistentDataContainer();
         container.set(this.plugin.itemIdKey(), PersistentDataType.STRING, ID);
         container.set(this.usesKey, PersistentDataType.INTEGER, uses);
+        Durability.apply(itemMeta, uses, uses);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

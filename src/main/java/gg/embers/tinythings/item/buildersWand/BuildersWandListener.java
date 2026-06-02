@@ -1,6 +1,7 @@
 package gg.embers.tinythings.item.buildersWand;
 
 import gg.embers.tinythings.TinyThings;
+import gg.embers.tinythings.item.Durability;
 import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.GameMode;
@@ -145,6 +146,7 @@ public class BuildersWandListener implements Listener {
         ItemMeta meta = wand.getItemMeta();
         meta.getPersistentDataContainer().set(this.item.usesKey(), PersistentDataType.INTEGER, remaining);
         meta.setLore(this.item.buildLore(remaining, max, size));
+        Durability.apply(meta, remaining, max);
         wand.setItemMeta(meta);
     }
 }
