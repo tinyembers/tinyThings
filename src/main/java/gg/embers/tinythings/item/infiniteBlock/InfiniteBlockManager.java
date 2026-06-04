@@ -49,6 +49,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -110,6 +113,25 @@ implements Listener {
             this.plugin.getLogger().warning("Infinite item without version key.");
         }
         return true;
+    }
+
+    private boolean hasInfiniteTag(ItemStack itemStack) {
+        if (itemStack == null || !itemStack.hasItemMeta()) {
+            return false;
+        }
+        return itemStack.getItemMeta().getPersistentDataContainer().has(this.infBlockKey);
+    }
+
+    private boolean matrixContainsInfinite(ItemStack[] matrix) {
+        if (matrix == null) {
+            return false;
+        }
+        for (ItemStack itemStack : matrix) {
+            if (this.hasInfiniteTag(itemStack)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean updateItem(ItemStack itemStack, int n) {
@@ -218,6 +240,28 @@ implements Listener {
         } else {
             player.sendMessage("\u00a7cYou do not have enough money to place this!");
             blockPlaceEvent.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority=EventPriority.HIGHEST)
+    public void onPrepareCraft(PrepareItemCraftEvent prepareItemCraftEvent) {
+        CraftingInventory craftingInventory = prepareItemCraftEvent.getInventory();
+        if (craftingInventory.getResult() == null) {
+            return;
+        }
+        if (this.matrixContainsInfinite(craftingInventory.getMatrix())) {
+            craftingInventory.setResult(null);
+        }
+    }
+
+    @EventHandler(priority=EventPriority.HIGHEST, ignoreCancelled=true)
+    public void onCraftItem(CraftItemEvent craftItemEvent) {
+        if (!this.matrixContainsInfinite(craftItemEvent.getInventory().getMatrix())) {
+            return;
+        }
+        craftItemEvent.setCancelled(true);
+        if (craftItemEvent.getWhoClicked() instanceof Player player) {
+            player.sendActionBar(Component.text((String)"Infinite blocks can't be used in crafting!").color((TextColor)NamedTextColor.RED));
         }
     }
 
