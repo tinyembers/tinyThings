@@ -44,16 +44,25 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockCookEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.PrepareGrindstoneEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.event.inventory.PrepareSmithingEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.GrindstoneInventory;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.SmithingInventory;
+import org.bukkit.inventory.StonecutterInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -132,6 +141,38 @@ implements Listener {
             }
         }
         return false;
+    }
+
+    private boolean stationInputsInfinite(Inventory inventory) {
+        if (inventory instanceof StonecutterInventory stonecutterInventory) {
+            return this.hasInfiniteTag(stonecutterInventory.getInputItem());
+        }
+        if (inventory instanceof GrindstoneInventory grindstoneInventory) {
+            return this.hasInfiniteTag(grindstoneInventory.getUpperItem()) || this.hasInfiniteTag(grindstoneInventory.getLowerItem());
+        }
+        if (inventory instanceof SmithingInventory smithingInventory) {
+            return this.hasInfiniteTag(smithingInventory.getInputTemplate()) || this.hasInfiniteTag(smithingInventory.getInputEquipment()) || this.hasInfiniteTag(smithingInventory.getInputMineral());
+        }
+        return false;
+    }
+
+    private int stationResultSlot(Inventory inventory) {
+        if (inventory instanceof StonecutterInventory) {
+            return 1;
+        }
+        if (inventory instanceof GrindstoneInventory) {
+            return 2;
+        }
+        if (inventory instanceof SmithingInventory) {
+            return 3;
+        }
+        return -1;
+    }
+
+    private void notifyBlocked(HumanEntity humanEntity) {
+        if (humanEntity instanceof Player player) {
+            player.sendActionBar(Component.text((String)"Infinite blocks can't be used in crafting!").color((TextColor)NamedTextColor.RED));
+        }
     }
 
     private boolean updateItem(ItemStack itemStack, int n) {
@@ -260,9 +301,47 @@ implements Listener {
             return;
         }
         craftItemEvent.setCancelled(true);
-        if (craftItemEvent.getWhoClicked() instanceof Player player) {
-            player.sendActionBar(Component.text((String)"Infinite blocks can't be used in crafting!").color((TextColor)NamedTextColor.RED));
+        this.notifyBlocked(craftItemEvent.getWhoClicked());
+    }
+
+    @EventHandler(priority=EventPriority.HIGHEST, ignoreCancelled=true)
+    public void onBlockCook(BlockCookEvent blockCookEvent) {
+        if (this.hasInfiniteTag(blockCookEvent.getSource())) {
+            blockCookEvent.setCancelled(true);
         }
+    }
+
+    @EventHandler(priority=EventPriority.HIGHEST)
+    public void onPrepareSmithing(PrepareSmithingEvent prepareSmithingEvent) {
+        if (prepareSmithingEvent.getResult() == null) {
+            return;
+        }
+        if (this.stationInputsInfinite(prepareSmithingEvent.getInventory())) {
+            prepareSmithingEvent.setResult(null);
+        }
+    }
+
+    @EventHandler(priority=EventPriority.HIGHEST)
+    public void onPrepareGrindstone(PrepareGrindstoneEvent prepareGrindstoneEvent) {
+        if (prepareGrindstoneEvent.getResult() == null) {
+            return;
+        }
+        if (this.stationInputsInfinite(prepareGrindstoneEvent.getInventory())) {
+            prepareGrindstoneEvent.setResult(null);
+        }
+    }
+
+    @EventHandler(priority=EventPriority.HIGHEST, ignoreCancelled=true)
+    public void onResultStationClick(InventoryClickEvent inventoryClickEvent) {
+        int resultSlot = this.stationResultSlot(inventoryClickEvent.getInventory());
+        if (resultSlot < 0 || inventoryClickEvent.getRawSlot() != resultSlot) {
+            return;
+        }
+        if (!this.stationInputsInfinite(inventoryClickEvent.getInventory())) {
+            return;
+        }
+        inventoryClickEvent.setCancelled(true);
+        this.notifyBlocked(inventoryClickEvent.getWhoClicked());
     }
 
     private static String capitalizeFully(String string) {
